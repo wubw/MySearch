@@ -26,11 +26,11 @@ def check_ext(file_path, ext_check):
         ext_check[file_extension] = 1
 
 def crawl(folder):
-    output_file_path = 'files.txt'
+    output_file_path = 'output/files.txt'
     ext_check = {}
 
     files_cnt = 0
-    with open(output_file_path, 'w') as output_file:
+    with open(output_file_path, 'w', encoding="utf-8") as output_file:
         # os.walk can have performance issue
         for root, subdirs, files in os.walk(folder):
             if not is_valid_folder(root):
