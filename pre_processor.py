@@ -25,7 +25,7 @@ class PreProcessor:
     def reduce_space(self):
         self.working_txt = re.sub(r'\s+', ' ', self.working_txt)
 
-    def process(self):
+    def start(self):
         self.remove_urls()
         self.remove_newline()
         self.remove_specialchars()

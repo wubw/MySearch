@@ -26,9 +26,3 @@ class BloomFilter:
             if self.bit_array[index] == 0:
                 return False
         return True
-
-# Example usage
-bloom = BloomFilter(size=500, hash_count=7)
-bloom.add("example")
-print(bloom.check("example"))  # Output: True
-print(bloom.check("test"))     # Output: False
