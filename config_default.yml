@@ -1,5 +1,6 @@
 folders:
   ['C:\Users\binweiwu.REDMOND\OneDrive - Microsoft\ObsidianNote']
+  #  ['D:/OneDrive - Microsoft/ObsidianNote']
 
 exclude_file_extensions:
   ['.css', '.js', '.json', '.png', '.jpeg', '.jpg', '.canvas', '.xlsx', '.docx']
