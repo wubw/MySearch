@@ -10,8 +10,7 @@ py -m spacy download en_core_web_sm
 py -m unittest
 
 ## Run steps
-py -m get_files
-py -m tokenizer
+
 
 # Mac
 pip install -r requirements.txt
