@@ -1,0 +1,11 @@
+
+Live document - content must be updated
+
+[Document management](https://microsoftapc-my.sharepoint.com/:w:/g/personal/binweiwu_microsoft_com/EY5xcogxwR9InxM71hY19NsBq4Ep09cS5he4oJ9NouVN2Q?e=G2VFVT)
+
+Jason's  [Knowledge Graph](https://microsoft-my.sharepoint-df.com/:u:/r/personal/yujason_microsoft_com/Documents/Documents/Projects/Knowledge%20Graph.xmind?e=4%3a32e1089f94a247b4b9e2f21d2ab56b23&web=1&sharingv2=true&fromShare=true&at=9&xsdata=MDV8MDJ8Ymlud2Vpd3VAbWljcm9zb2Z0LmNvbXxlMTIzMGY4Y2YwOGI0MWE0NjVlZTA4ZGNhMjFkYzE0Y3w3MmY5ODhiZjg2ZjE0MWFmOTFhYjJkN2NkMDExZGI0N3wxfDB8NjM4NTYzNDk2MDQyNjY4MDkyfFVua25vd258VFdGcGJHWnNiM2Q4ZXlKV0lqb2lNQzR3TGpBd01EQWlMQ0pRSWpvaVYybHVNeklpTENKQlRpSTZJazFoYVd3aUxDSlhWQ0k2TW4wPXwwfHx8&sdata=TWhJTU81eklvd2RCY0gyQktUN3NpRSs0ZnQ1aGZjMkFiQUdORE5lZlRBYz0%3d)
+
+Content
+Structure
+Criteria
+Method

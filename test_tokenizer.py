@@ -1,13 +1,15 @@
 import pre_processor
 import tokenizer
+import file_item
 import unittest
 
 class TestTokenizer(unittest.TestCase):
     def test_start(self):
-        ppr = pre_processor.PreProcessor('test_data/Null POI.md')
+        fi = file_item.FileItem('test_data/Null POI.md')
+        ppr = pre_processor.PreProcessor(fi)
         ppr.start()
 
-        t = tokenizer.Tokenizer(ppr.working_txt)
+        t = tokenizer.Tokenizer(fi)
         tokens = t.start()
         self.assertGreater(len(tokens), 20)
 

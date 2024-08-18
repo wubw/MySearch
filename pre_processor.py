@@ -1,14 +1,11 @@
 import re
-import ntpath
 
 class PreProcessor:
     re_txt = r'(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]'
 
-    def __init__(self, file_path) -> None:
-        self.file_path = file_path
-        self.working_txt = None
-        with open(file_path, 'r') as file:
-            self.working_txt = file.read()
+    def __init__(self, search_item) -> None:
+        self.si = search_item
+        self.working_txt = self.si.txt
 
     def remove_urls(self):
         self.working_txt = re.sub(self.re_txt, '', self.working_txt, flags=re.MULTILINE)
@@ -31,11 +28,6 @@ class PreProcessor:
         self.remove_specialchars()
         self.reduce_space()
 
-        output_file_path = self.get_output_file_path()
-        with open(output_file_path, 'w', encoding="utf-8") as output_file:
-            output_file.write(self.working_txt)
-
-    def get_output_file_path(self):
-        filename = ntpath.basename(self.file_path)
-        return 'output/' + filename + '.ppr'
+        self.si.ppr_txt = self.working_txt
+        self.si.dump_pprfile()
     
