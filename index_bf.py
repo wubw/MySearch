@@ -57,4 +57,27 @@ class IndexBloomFilter:
         t = tokenizer.Tokenizer(si)
         tokens = t.start()
 
-        print(tokens)
+        token_check_count = {}
+        for t in tokens:
+            token_check_count[t] = self.check_token(t)
+        
+        results_by_path = {}
+        for k in token_check_count:
+            #print(k + ": ")
+            for fi in token_check_count[k]:
+                #print(fi.path)
+                if fi.path not in results_by_path:
+                    results_by_path[fi.path] = 1
+                else:
+                    results_by_path[fi.path] = results_by_path[fi.path] + 1
+
+        ret = self.ranking(results_by_path)
+        print(ret)
+
+        return ret
+
+    def ranking(self, results_by_path):
+        print(results_by_path)
+        sorted_keys = sorted(results_by_path, key=results_by_path.get, reverse=True)
+
+        return sorted_keys

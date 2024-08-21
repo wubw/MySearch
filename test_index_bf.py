@@ -36,4 +36,21 @@ class TestIndexBloomFilter(unittest.TestCase):
 
     def test_search(self):
         idx_bf = index_bf.IndexBloomFilter()
-        idx_bf.search("hello, world")
+        idx_bf.ingest_batch('test_data/*.md')
+        ret = idx_bf.search("hello, world")
+        self.assertEqual(len(ret), 0)
+
+        ret = idx_bf.search("test poi loop please")
+        self.assertGreaterEqual(len(ret), 4)
+        self.assertEqual(ret[0], 'test_data\\Null POI.md')
+
+    def test_ranking(self):
+        input_data = {'a': 1, 'b': 2, 'c': 3, 'd': 5, 'e': 4}
+        idx_bf = index_bf.IndexBloomFilter()
+        ret = idx_bf.ranking(input_data)
+        self.assertGreaterEqual(len(ret), 5)
+        self.assertEqual(ret[0], 'd')
+        self.assertEqual(ret[1], 'e')
+        self.assertEqual(ret[2], 'c')
+        self.assertEqual(ret[3], 'b')
+        self.assertEqual(ret[4], 'a')
