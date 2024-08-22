@@ -4,3 +4,4 @@ spacy
 
 bitarray
 mmh3
+BTrees
