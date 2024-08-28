@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 config.yml
+GoogleNews-vectors-negative300.bin.gz
 
 # C extensions
 *.so
