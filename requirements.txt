@@ -6,3 +6,6 @@ bitarray
 mmh3
 BTrees
 gensim
+annoy
+
+pynndescent
