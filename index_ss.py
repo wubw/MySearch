@@ -1,45 +1,61 @@
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from nltk.tokenize import word_tokenize
-
-txt = None
-with open('test_data/Null POI.md', 'r', encoding='utf-8') as file:
-    txt = file.read()
-
-lines = txt.splitlines()
-print(lines)
-
-# define a list of documents.
-data = ["This is the first document",
-        "This is the second document",
-        "This is the third document",
-        "This is the fourth document"]
-
-data = lines
-
-# preproces the documents, and create TaggedDocuments
-tagged_data = [TaggedDocument(words=word_tokenize(doc.lower()), tags=[str(i)]) for i, doc in enumerate(data)]
-
-# train the Doc2vec model
-model = Doc2Vec(vector_size=50, min_count=2, epochs=50)
-model.build_vocab(tagged_data)
-model.train(tagged_data, total_examples=model.corpus_count, epochs=model.epochs)
- 
-# get the document vectors
-document_vectors = [model.infer_vector(word_tokenize(doc.lower())) for doc in data]
-
+import glob
+import file_item
 import numpy as np
-np_arr = np.array(document_vectors)
-print(np_arr.shape)
-
-#  print the document vectors
-for i, doc in enumerate(data):
-    print("Document", i+1, ":", doc)
-    print("Vector:", document_vectors[i])
-    print()
-
 import pynndescent
 
-index = pynndescent.NNDescent(np_arr)
+class IndexSemanticSearch:
+    def __init__(self) -> None:
+        self.file_items = []
 
-neighbors = index.query([model.infer_vector(word_tokenize("what is poi?".lower()))])
-print(neighbors)
+    def ingest(self, file_path):
+        fi = file_item.FileItem(file_path)
+        fi.lines = []
+        for l in fi.txt.splitlines():
+            if l.strip() != '':
+                fi.lines.append(l)
+        print(fi.lines)
+        self.file_items.append(fi)
+
+    def ingest_batch(self, filter):
+        files = []
+        for f in glob.glob(filter):
+            files.append(f)
+
+        #print(files)
+        for f in files:
+            print(f)
+            self.ingest(f)
+
+    def build(self):
+        data = self.file_items[0]
+        tagged_data = [TaggedDocument(words=word_tokenize(doc.lower()), tags=[str(i)]) for i, doc in enumerate(data.lines)]
+        self.model = Doc2Vec(vector_size=50, min_count=2, epochs=50)
+        self.model.build_vocab(tagged_data)
+        self.model.train(tagged_data, total_examples=self.model.corpus_count, epochs=self.model.epochs)
+        self.document_vectors = [self.model.infer_vector(word_tokenize(doc.lower())) for doc in data.lines]
+
+    def display_index(self):
+        data = self.file_items[0]
+        np_arr = np.array(self.document_vectors)
+        print(np_arr.shape)
+
+        #  print the document vectors
+        for i, doc in enumerate(data.lines):
+            print("Document", i+1, ":", doc)
+            print("Vector:", self.document_vectors[i])
+            print()
+
+    def search(self, search_txt):
+        np_arr = np.array(self.document_vectors)
+        index = pynndescent.NNDescent(np_arr)
+
+        neighbors = index.query([self.model.infer_vector(word_tokenize(search_txt.lower()))], epsilon=0.0)
+        print(neighbors)
+
+idxss = IndexSemanticSearch()
+idxss.ingest('test_data/Null POI.md')
+idxss.build()
+idxss.display_index()
+idxss.search("poi")
